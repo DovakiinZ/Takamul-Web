@@ -17,6 +17,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/regester" element={<Reg />} />
