@@ -36,7 +36,7 @@ const Dashboard = () => {
               </div>
               <div className="flex flex-col justify-center">
                 <span className="text-2xl font-bold text-white leading-tight">
-                  Takamul
+                  Takamull
                 </span>
                 <span className="text-xs text-blue-100">
                   ERP System
