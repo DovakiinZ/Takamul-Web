@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Languages, Search } from "lucide-react";
+import { Languages, Search, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import DashboardHeader from "@/components/DashboardHeader";
 import StatsOverview from "@/components/StatsOverview";
@@ -12,12 +12,6 @@ import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   const [isArabic, setIsArabic] = useState(false);
-
-  const stats: any[] = [];
-  const actions: any[] = [];
-  const complianceItems: any[] = [];
-  const modules: any[] = [];
-  const custodies: any[] = [];
 
   return (
     <div className={`min-h-screen bg-takamul-light-gray ${isArabic ? 'font-cairo' : 'font-poppins'}`} dir={isArabic ? "rtl" : "ltr"}>
@@ -49,6 +43,11 @@ const Dashboard = () => {
               <Button variant="ghost" size="sm" className="text-white hover:text-blue-100 hover:bg-blue-600/50">
                 <Search className="w-5 h-5" />
               </Button>
+              <Link to="/settings">
+                <Button variant="ghost" size="sm" className="text-white hover:text-blue-100 hover:bg-blue-600/50">
+                  <Settings className="w-5 h-5" />
+                </Button>
+              </Link>
               <Button
                 variant="ghost"
                 size="sm"
@@ -69,16 +68,16 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-8">
           <div className="lg:col-span-3">
-            <StatsOverview isArabic={isArabic} stats={stats} />
-            <ModuleGrid isArabic={isArabic} modules={modules} />
+            <StatsOverview isArabic={isArabic} />
+            <ModuleGrid isArabic={isArabic} />
           </div>
           <div className="space-y-6">
-            <QuickActions isArabic={isArabic} actions={actions} />
-            <ComplianceStatus isArabic={isArabic} items={complianceItems} />
+            <QuickActions isArabic={isArabic} />
+            <ComplianceStatus isArabic={isArabic} />
           </div>
         </div>
 
-        <Custodies isArabic={isArabic} data={custodies} onAddClick={() => {}} />
+        <Custodies isArabic={isArabic} />
       </div>
 
       <ChatBot isArabic={isArabic} />

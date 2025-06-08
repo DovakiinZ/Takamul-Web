@@ -1,4 +1,3 @@
-
 import React, { useState, useRef } from 'react';
 import { Upload, FileSpreadsheet, Check, X, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -123,6 +122,7 @@ const BulkUpload = ({ isArabic, serviceName, serviceNameArabic, onUpload }: Bulk
           size="sm" 
           variant="outline"
           className="text-blue-600 border-blue-200 hover:bg-blue-50"
+          onClick={(e) => e.stopPropagation()}
         >
           <Upload className="w-4 h-4 mr-1" />
           {isArabic ? "رفع ملف" : "Upload"}

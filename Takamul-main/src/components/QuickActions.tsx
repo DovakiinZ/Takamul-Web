@@ -1,7 +1,7 @@
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Plus, Upload, Download, Send } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Plus, Upload, Download, Send, Settings } from "lucide-react";
 
 interface QuickActionsProps {
   isArabic: boolean;
@@ -12,22 +12,26 @@ const QuickActions = ({ isArabic }: QuickActionsProps) => {
     {
       title: isArabic ? "فاتورة جديدة" : "New Invoice",
       icon: Plus,
-      color: "bg-takamul-royal-blue hover:bg-blue-700"
+      color: "bg-takamul-royal-blue hover:bg-blue-700",
+      route: "/new-invoice"
     },
     {
       title: isArabic ? "رفع مستند" : "Upload Document",
       icon: Upload,
-      color: "bg-takamul-emerald-green hover:bg-green-600"
+      color: "bg-takamul-emerald-green hover:bg-green-600",
+      route: "/dashboard" // You can create a specific upload page later
     },
     {
       title: isArabic ? "تقرير مالي" : "Financial Report",
       icon: Download,
-      color: "bg-gradient-to-r from-takamul-emerald-green to-green-600 hover:from-green-600 hover:to-green-700"
+      color: "bg-gradient-to-r from-takamul-emerald-green to-green-600 hover:from-green-600 hover:to-green-700",
+      route: "/accounting" // Links to accounting for now
     },
     {
-      title: isArabic ? "إرسال كشف" : "Send Statement",
-      icon: Send,
-      color: "bg-gradient-to-r from-takamul-royal-blue to-blue-600 hover:from-blue-600 hover:to-blue-700"
+      title: isArabic ? "الإعدادات" : "Settings",
+      icon: Settings,
+      color: "bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700",
+      route: "/settings"
     }
   ];
 
@@ -40,14 +44,15 @@ const QuickActions = ({ isArabic }: QuickActionsProps) => {
       </CardHeader>
       <CardContent className="space-y-3">
         {actions.map((action, index) => (
-          <Button
-            key={index}
-            className={`w-full justify-center text-center ${action.color} text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-medium ${isArabic ? 'font-cairo' : 'font-poppins'}`}
-            size="sm"
-          >
-            <action.icon className="w-4 h-4 mr-2" />
-            {action.title}
-          </Button>
+          <Link key={index} to={action.route}>
+            <Button
+              className={`w-full justify-center text-center ${action.color} text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 font-medium ${isArabic ? 'font-cairo' : 'font-poppins'}`}
+              size="sm"
+            >
+              <action.icon className="w-4 h-4 mr-2" />
+              {action.title}
+            </Button>
+          </Link>
         ))}
       </CardContent>
     </Card>
