@@ -1,9 +1,9 @@
-
 import { useState } from "react";
-import { ArrowLeft, Users, Shield, Bell, Globe, Database, Key } from "lucide-react";
+import { ArrowLeft, Globe, Users, Shield, Bell, Database, Key } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link } from "react-router-dom";
 import UserManagement from "@/components/settings/UserManagement";
 import PermissionsManagement from "@/components/settings/PermissionsManagement";
 import NotificationSettings from "@/components/settings/NotificationSettings";
@@ -11,10 +11,8 @@ import SystemSettings from "@/components/settings/SystemSettings";
 import DatabaseSettings from "@/components/settings/DatabaseSettings";
 import SecuritySettings from "@/components/settings/SecuritySettings";
 
-interface SettingsProps {}
-
 const Settings = () => {
-  const [isArabic, setIsArabic] = useState(false);
+  const { isArabic, toggleLanguage } = useLanguage();
 
   const settingsTabs = [
     {
@@ -77,7 +75,7 @@ const Settings = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setIsArabic(!isArabic)}
+              onClick={toggleLanguage}
               className="text-takamul-royal-blue hover:bg-blue-50 font-cairo"
             >
               <Globe className="w-4 h-4 mr-1" />

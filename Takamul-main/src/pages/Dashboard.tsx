@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { Languages, Search, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import DashboardHeader from "@/components/DashboardHeader";
 import StatsOverview from "@/components/StatsOverview";
 import ModuleGrid from "@/components/ModuleGrid";
@@ -11,7 +11,7 @@ import Custodies from "@/components/Custodies";
 import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
-  const [isArabic, setIsArabic] = useState(false);
+  const { isArabic, toggleLanguage } = useLanguage();
 
   return (
     <div className={`min-h-screen bg-takamul-light-gray ${isArabic ? 'font-cairo' : 'font-poppins'}`} dir={isArabic ? "rtl" : "ltr"}>
@@ -19,26 +19,22 @@ const Dashboard = () => {
       <nav className="bg-takamul-royal-blue shadow-lg border-b border-blue-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Right side - logo + name */}
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-lg">
-                <img
-                  src="/uploads/logo.png"
-                  alt="Takamul Logo"
-                  className="h-8 w-8 object-contain opacity-100 hover:opacity-60 transition-opacity duration-300"
-                />
-              </div>
-              <div className="flex flex-col justify-center">
-                <span className="text-2xl font-bold text-white leading-tight">
-                  Takamull
-                </span>
-                <span className="text-xs text-blue-100">
-                  ERP System
-                </span>
+            <div className="flex items-center">
+              <div className="flex-shrink-0 flex items-center">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                  <span className="text-takamul-royal-blue font-bold text-xl">ت</span>
+                </div>
+                <div className="ml-3">
+                  <h1 className="text-2xl font-bold text-white">
+                    {isArabic ? "تكامل" : "Takamul"}
+                  </h1>
+                  <p className="text-sm text-blue-100">
+                    {isArabic ? "نظام تخطيط موارد المؤسسة" : "Enterprise Resource Planning"}
+                  </p>
+                </div>
               </div>
             </div>
-
-            {/* Left side - controls */}
+            
             <div className="flex items-center gap-4">
               <Button variant="ghost" size="sm" className="text-white hover:text-blue-100 hover:bg-blue-600/50">
                 <Search className="w-5 h-5" />
@@ -52,7 +48,7 @@ const Dashboard = () => {
                 variant="ghost"
                 size="sm"
                 className="text-white hover:text-blue-100 hover:bg-blue-600/50"
-                onClick={() => setIsArabic(!isArabic)}
+                onClick={toggleLanguage}
               >
                 <Languages className="w-5 h-5" />
                 <span className="ml-1">{isArabic ? "English" : "العربية"}</span>

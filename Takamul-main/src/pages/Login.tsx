@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [lang, setLang] = useState<'en' | 'ar'>('en');
-
-  const isArabic = lang === 'ar';
+  const { isArabic, toggleLanguage } = useLanguage();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +52,7 @@ export default function Login() {
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-bold">{isArabic ? 'مرحبًا بعودتك' : 'Welcome Back'}</h1>
             <button
-              onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+              onClick={() => toggleLanguage()}
               className="text-sm text-blue-600 hover:text-blue-800 transition-all duration-150 border px-2 py-1 rounded shadow"
             >
               {isArabic ? 'English' : 'العربية'}

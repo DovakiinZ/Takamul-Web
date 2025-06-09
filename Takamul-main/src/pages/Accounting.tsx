@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Calculator, ArrowLeft, Languages } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Accounting = () => {
-  const [isArabic, setIsArabic] = useState(false);
+  const { isArabic, toggleLanguage } = useLanguage();
 
   const features = [
     {
@@ -57,7 +57,7 @@ const Accounting = () => {
               variant="ghost"
               size="sm"
               className="text-white hover:text-blue-100 hover:bg-blue-600/50"
-              onClick={() => setIsArabic(!isArabic)}
+              onClick={toggleLanguage}
             >
               <Languages className="w-5 h-5" />
               <span className="ml-1">{isArabic ? "English" : "العربية"}</span>
@@ -69,22 +69,20 @@ const Accounting = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h2 className={`text-3xl font-bold text-takamul-royal-blue mb-4 ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
-            {isArabic ? "نظام المحاسبة" : "Accounting System"}
+          <h2 className={`text-3xl font-bold text-gray-900 mb-4 ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
+            {isArabic ? "نظام المحاسبة المتكامل" : "Integrated Accounting System"}
           </h2>
           <p className={`text-lg text-gray-600 ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
-            {isArabic 
-              ? "نظام محاسبي شامل متوافق مع المعايير السعودية واللوائح الضريبية" 
-              : "Comprehensive accounting system compliant with Saudi standards and tax regulations"
-            }
+            {isArabic ? "نظام محاسبة شامل متوافق مع المعايير السعودية ومتطلبات هيئة الزكاة والضريبة" : "Comprehensive accounting system compliant with Saudi standards and ZATCA requirements"}
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {features.map((feature, index) => (
-            <Card key={index} className="bg-white/90 backdrop-blur-md border border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
-              <CardHeader>
-                <CardTitle className={`text-xl font-bold text-takamul-royal-blue ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
+            <Card key={index} className="hover:shadow-lg transition-shadow duration-300 border-l-4 border-l-takamul-royal-blue">
+              <CardHeader className="pb-3">
+                <CardTitle className={`text-lg ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
                   {feature.title}
                 </CardTitle>
               </CardHeader>
@@ -97,21 +95,17 @@ const Accounting = () => {
           ))}
         </div>
 
-        <Card className="bg-white/90 backdrop-blur-md border border-blue-100 shadow-lg">
-          <CardHeader>
-            <CardTitle className={`text-2xl font-bold text-takamul-royal-blue text-center ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
-              {isArabic ? "قريباً - المزيد من الميزات" : "Coming Soon - More Features"}
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="text-center">
-            <p className={`text-lg text-gray-600 mb-6 ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
-              {isArabic 
-                ? "نعمل على تطوير المزيد من الميزات المحاسبية المتقدمة" 
-                : "We're working on developing more advanced accounting features"
-              }
+        {/* Status Card */}
+        <Card className="bg-gradient-to-r from-takamul-royal-blue to-blue-700 text-white">
+          <CardContent className="p-8 text-center">
+            <h3 className={`text-2xl font-bold mb-4 ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
+              {isArabic ? "النظام متاح الآن" : "System Available Now"}
+            </h3>
+            <p className={`text-blue-100 mb-6 ${isArabic ? 'font-cairo' : 'font-poppins'}`}>
+              {isArabic ? "ابدأ في استخدام نظام المحاسبة المتكامل اليوم" : "Start using the integrated accounting system today"}
             </p>
-            <Button className="bg-takamul-emerald-green hover:bg-green-600 text-white">
-              {isArabic ? "اطلب عرضاً تجريبياً" : "Request Demo"}
+            <Button variant="secondary" size="lg" className="font-medium">
+              {isArabic ? "ابدأ الآن" : "Get Started"}
             </Button>
           </CardContent>
         </Card>

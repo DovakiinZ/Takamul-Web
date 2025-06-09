@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { Package, ArrowLeft, Languages } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Inventory = () => {
-  const [isArabic, setIsArabic] = useState(false);
+  const { isArabic, toggleLanguage } = useLanguage();
 
   const features = [
     {
@@ -57,7 +57,7 @@ const Inventory = () => {
               variant="ghost"
               size="sm"
               className="text-white hover:text-blue-100 hover:bg-blue-600/50"
-              onClick={() => setIsArabic(!isArabic)}
+              onClick={toggleLanguage}
             >
               <Languages className="w-5 h-5" />
               <span className="ml-1">{isArabic ? "English" : "العربية"}</span>
